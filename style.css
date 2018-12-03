@@ -185,14 +185,14 @@ footer {
   h1 {
     font-size: 2rem;
   }
-  .lotto-ball {
+  .lotto-ball,
+  .lucky-lotto-ball {
     width: 50px;
     height: 50px;
     font-size: 1.5rem;
     margin: 0 0.2rem;
   }
-  .lotto-btn,
-  .lucky-lotto-ball {
+  .lotto-btn {
     font-size: 1.5rem;
   }
   @keyframes size {
