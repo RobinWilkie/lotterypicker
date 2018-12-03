@@ -36,9 +36,21 @@ header {
   margin-bottom: 2rem;
 }
 
+nav {
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+}
+
 footer {
   position: absolute;
   bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .lotto-numbers {
@@ -73,6 +85,40 @@ footer {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1301FE', endColorstr='#F4F60C', GradientType='1');
   /* for IE */
   background: linear-gradient(230deg, #08fedd 33%, #e7f619 92%); /* W3C */
+  border-radius: 50%;
+  margin: 0 15px;
+  box-shadow: inset 0 0 30px #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+.lucky-lotto-ball {
+  width: 100px;
+  height: 100px;
+  background: -moz-linear-gradient(230deg, #fe0303 33%, #e7f619 92%);
+  /* FF3.6+ */
+  background: -webkit-gradient(
+    linear,
+    230deg,
+    color-stop(33%, FE0303),
+    color-stop(92%, E7F619)
+  ); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(
+    230deg,
+    #fe0303 33%,
+    #e7f619 92%
+  ); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(
+    230deg,
+    #fe0303 33%,
+    #e7f619 92%
+  ); /* Opera 11.10+ */
+  background: -ms-linear-gradient(230deg, #fe0303 33%, #e7f619 92%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1301FE', endColorstr='#F4F60C', GradientType='1'); /* for IE */
+  background: linear-gradient(230deg, #fe0303 33%, #e7f619 92%); /* W3C */
   border-radius: 50%;
   margin: 0 15px;
   box-shadow: inset 0 0 30px #000;
@@ -145,7 +191,8 @@ footer {
     font-size: 1.5rem;
     margin: 0 0.2rem;
   }
-  .lotto-btn {
+  .lotto-btn,
+  .lucky-lotto-ball {
     font-size: 1.5rem;
   }
   @keyframes size {

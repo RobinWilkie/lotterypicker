@@ -20,7 +20,7 @@
   </head>
 
   <body>
-    <header><h1>UK National Lottery Number Generator</h1></header>
+    <header><h1>EuroMillions Lottery Number Generator</h1></header>
 
     <section class="lotto-numbers">
       <div id="circle0" class="lotto-ball"></div>
@@ -28,24 +28,37 @@
       <div id="circle2" class="lotto-ball"></div>
       <div id="circle3" class="lotto-ball"></div>
       <div id="circle4" class="lotto-ball"></div>
-      <div id="circle5" class="lotto-ball"></div>
+      <div id="luckycircle0" class="lucky-lotto-ball"></div>
+      <div id="luckycircle1" class="lucky-lotto-ball"></div>
     </section>
 
     <section class="lotto-button">
-      <button id="go" class="lotto-btn" onclick="chooseNumbers(6, 1, 59);">
+      <button
+        id="go"
+        class="lotto-btn"
+        onclick="chooseNumbers(5, 1, 50, 2, 1, 12);"
+      >
         Generate Numbers
       </button>
     </section>
 
     <footer>
-      <nav><a href="euro-picker.html">EuroMillions</a></nav>
+      <nav><a href="lottery-picker.html">Lottery</a></nav>
       <p>&copy; Robin Wilkie 2018</p>
     </footer>
 
     <script>
-      function chooseNumbers(lottoSize, lowestBall, HighestBall) {
+      function chooseNumbers(
+        lottoSize,
+        lowestBall,
+        HighestBall,
+        luckylottoSize,
+        luckylowestBall,
+        luckyHighestBall
+      ) {
         // empty array for numbers
         var lottoNumbers = [];
+        var luckylottoNumbers = [];
 
         // loop through balls
         for (var x = 0; x < lottoSize; x++) {
@@ -65,6 +78,25 @@
           }
         }
 
+        // loop through lucky star balls
+        for (var z = 0; z < luckylottoSize; z++) {
+          var luckyadd = true;
+          // asign a random number up to the highest ball number
+          var luckylottoRandom =
+            Math.floor(Math.random() * luckyHighestBall) + 1;
+          for (var i = 0; i < luckyHighestBall; i++) {
+            if (luckylottoNumbers[i] == luckylottoRandom) {
+              luckyadd = false;
+            }
+          }
+          if (luckyadd) {
+            // push to lotto number array
+            luckylottoNumbers.push(luckylottoRandom);
+          } else {
+            z--;
+          }
+        }
+
         var highestNumber = 0;
         for (var y = 0; y < lottoNumbers.length; y++) {
           for (var z = y + 1; z < lottoNumbers.length; z++) {
@@ -76,24 +108,56 @@
           }
         }
 
+        var luckyhighestNumber = 0;
+        for (var q = 0; q < luckylottoNumbers.length; q++) {
+          for (var s = q + 1; s < luckylottoNumbers.length; s++) {
+            if (luckylottoNumbers[s] < luckylottoNumbers[q]) {
+              luckyhighestNumber = luckylottoNumbers[q];
+              luckylottoNumbers[q] = luckylottoNumbers[s];
+              luckylottoNumbers[s] = luckyhighestNumber;
+            }
+          }
+        }
+
         function redo() {
-          for (var i = 0; i < 6; i++) {
+          for (var i = 0; i < 5; i++) {
             var element = document.getElementById("circle" + i);
             element.classList.remove("rotate");
           }
         }
 
         function rotate() {
-          for (var i = 0; i < 6; i++) {
+          for (var i = 0; i < 5; i++) {
             var element = document.getElementById("circle" + i);
             element.classList.add("rotate");
             setTimeout(redo, 500);
           }
         }
 
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < 5; i++) {
           document.getElementById("circle" + i).innerHTML = lottoNumbers[i];
           rotate();
+        }
+
+        function luckyredo() {
+          for (var i = 0; i < 2; i++) {
+            var element = document.getElementById("luckycircle" + i);
+            element.classList.remove("rotate");
+          }
+        }
+
+        function luckyrotate() {
+          for (var i = 0; i < 2; i++) {
+            var element = document.getElementById("luckycircle" + i);
+            element.classList.add("rotate");
+            setTimeout(luckyredo, 500);
+          }
+        }
+
+        for (var i = 0; i < 2; i++) {
+          document.getElementById("luckycircle" + i).innerHTML =
+            luckylottoNumbers[i];
+          luckyrotate();
         }
       }
     </script>
