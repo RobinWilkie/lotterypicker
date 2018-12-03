@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="V4r9lw7q54hpLRxTy--9fsRuENylCD7bvbteV_5Xqc0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="UK National Lottery Number Generator">
+    <meta name="keywords" content="lottery, number generator">
+    <meta name="author" content="Robin Wilkie">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Lottery Picker</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>UK National Lottery Number Generator</h1>
+    </header>
+
+    <section class="lotto-numbers">
+        <div id="circle0" class="lotto-ball"></div>
+        <div id="circle1" class="lotto-ball"></div>
+        <div id="circle2" class="lotto-ball"></div>
+        <div id="circle3" class="lotto-ball"></div>
+        <div id="circle4" class="lotto-ball"></div>
+        <div id="circle5" class="lotto-ball"></div>
+    </section>
+
+    <section class="lotto-button">
+        <button id="go" class="lotto-btn" onclick="chooseNumbers(6, 1, 59);">Generate Numbers</button>
+    </section>
+
+    <footer>
+        <p>&copy; Robin Wilkie 2018</p>
+    </footer>
+
+    <script>
+
+        function chooseNumbers(lottoSize, lowestBall, HighestBall) {
+            // empty array for numbers
+            var lottoNumbers = [];
+
+            // loop through balls 
+            for (var x = 0; x < lottoSize; x++) {
+                var add = true;
+                // asign a random number up to the highest ball number
+                var lottoRandom = Math.floor(Math.random() * HighestBall) + 1;
+                for (var i = 0; i < HighestBall; i++) {
+                    if (lottoNumbers[i] == lottoRandom) {
+                        add = false;
+                    }
+                }
+                if (add) {
+                    // push to lotto number array
+                    lottoNumbers.push(lottoRandom);
+                } else {
+                    x--;
+                }
+            }
+
+            var highestNumber = 0;
+            for (var y = 0; y < lottoNumbers.length; y++) {
+                for (var z = y + 1; z < lottoNumbers.length; z++) {
+                    if (lottoNumbers[z] < lottoNumbers[y]) {
+                        highestNumber = lottoNumbers[y];
+                        lottoNumbers[y] = lottoNumbers[z];
+                        lottoNumbers[z] = highestNumber;
+                    }
+                }
+            }
+
+            function redo() {
+                for (var i = 0; i < 6; i++) {
+                    var element = document.getElementById("circle" + i);
+                    element.classList.remove("rotate");
+                }
+            }
+
+            function rotate() {
+                for (var i = 0; i < 6; i++) {
+                    var element = document.getElementById("circle" + i);
+                    element.classList.add("rotate");
+                    setTimeout(redo, 500);
+                }
+            }
+
+            for (var i = 0; i < 6; i++) {
+                document.getElementById("circle" + i).innerHTML = lottoNumbers[i];
+                rotate();
+            }
+
+        };
+
+    </script>
+
+</body>
+
+</html>
